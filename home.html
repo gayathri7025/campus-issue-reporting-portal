@@ -1,0 +1,103 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<!-- Custom Styles for this Page -->
+<style>
+    /* 1. The Rising Animation */
+    @keyframes slideUp {
+        0% {
+            opacity: 0;
+            transform: translateY(50px); /* Start lower */
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0); /* End at normal position */
+        }
+    }
+
+       /* 2. Hero Background & Container */
+    .hero-container {
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        /* UPDATED: Light Lavender Gradient */
+        background: linear-gradient(135deg, #ffffff 0%, #E6E6FA 100%);
+
+        border-radius: var(--radius);
+        padding: 3rem;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    }
+
+    /* Decorative Circle in Background */
+    .hero-bg-circle {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: rgba(37, 99, 235, 0.05); /* Very faint blue */
+        border-radius: 50%;
+        top: -100px;
+        right: -100px;
+        z-index: 0;
+    }
+
+    /* 3. Animation Classes */
+    .animate-up {
+        opacity: 0; /* Hidden initially */
+        animation: slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        z-index: 1;
+    }
+
+    /* Delays for the Staggered Effect */
+    .delay-1 { animation-delay: 0.1s; } /* Title */
+    .delay-2 { animation-delay: 0.4s; } /* Quote */
+    .delay-3 { animation-delay: 0.7s; } /* Button */
+
+    /* 4. Typography Styling */
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(to right, var(--primary), var(--primary-dark));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+    }
+
+    .hero-quote {
+        font-size: 1.5rem;
+        color: var(--secondary);
+        font-style: italic;
+        max-width: 600px;
+        margin-bottom: 2.5rem;
+        line-height: 1.6;
+    }
+</style>
+
+<div class="hero-container">
+    <!-- Background Decoration -->
+    <div class="hero-bg-circle"></div>
+
+    <!-- Animated Title (Rises First) -->
+    <h1 class="hero-title animate-up delay-1">
+        Welcome to Campus Report
+    </h1>
+
+    <!-- Animated Quote (Rises Second) -->
+    <p class="hero-quote animate-up delay-2">
+        “Your voice builds a better campus. Report issues, track progress, and make a difference today.”
+    </p>
+
+    <!-- Animated Button (Rises Last) -->
+    <a href="{% url 'login' %}" class="btn btn-primary animate-up delay-3" style="font-size: 1.1rem; padding: 1rem 2.5rem; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);">
+        Get Started
+    </a>
+</div>
+
+{% endblock %}
