@@ -1,0 +1,57 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="font-bold" style="margin-bottom: 1.5rem; font-size: 1.5rem;">Report an Issue</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label style="font-weight: 600; font-size: 0.9rem;">Issue Title</label>
+        <input type="text" name="title" placeholder="e.g., Broken Window in Library" required>
+
+        <div class="flex gap-4">
+            <div class="w-full">
+                <label style="font-weight: 600; font-size: 0.9rem;">Location</label>
+                <input type="text" name="location" placeholder="Building/Room Number" required>
+            </div>
+            <div class="w-full">
+                <label style="font-weight: 600; font-size: 0.9rem;">Category</label>
+                <select name="category">
+                    <option value="Infrastructure">Infrastructure</option>
+                    <option value="Safety">Safety</option>
+                    <option value="Discipline">Discipline</option>
+                    <option value="Academic">Academic</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <label style="font-weight: 600; font-size: 0.9rem;">Description</label>
+        <textarea name="description" rows="5" placeholder="Describe the issue in detail..." required></textarea>
+
+        <!-- PHOTO UPLOAD SECTION MOVED HERE -->
+        <label style="font-weight: 600; font-size: 0.9rem;">Image Proof (Optional)</label>
+        <div class="file-upload-wrapper">
+            <input type="file" name="image" accept="image/*">
+            <div id="upload-text">
+                <span style="font-size: 2rem; display: block; margin-bottom: 0.5rem;">📷</span>
+                Click to upload or drag and drop
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center" style="margin-bottom: 1rem; margin-top: 1rem;">
+            <label class="flex items-center gap-2" style="cursor: pointer;">
+                <input type="checkbox" name="is_confidential" style="width: auto; margin: 0;">
+                <span style="font-size: 0.9rem; font-weight: 600;">Mark as Confidential</span>
+            </label>
+            <small style="color: var(--text-muted);">Only admins can view confidential reports.</small>
+        </div>
+
+        <div class="flex gap-4 mt-4">
+            <a href="{% url 'dashboard' %}" class="btn btn-outline w-full">Cancel</a>
+            <button type="submit" class="btn btn-primary w-full">Submit Report</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
